@@ -49,7 +49,9 @@ Useful review cases:
 
 - A local bug fix should investigate the cause without inventing an architectural redesign.
 - A feature that changes state ownership should load the design reference and explain the consequential choice.
-- Related duplication should prompt consolidation when it removes shared knowledge, not an unrelated repository cleanup.
+- Related duplication should prompt consolidation when it removes repeated knowledge, not an unrelated repository cleanup. Extraction should reduce what readers must understand rather than scatter tightly related logic.
+- A shared interface should simplify current use without embedding product-specific cases or making every caller repeat its mechanics. Contract documentation should expose the information callers need without narrating implementation details.
+- Special-case elimination should preserve meaningful failures, not hide invalid input or report failed work as successful.
 - Verification should target a meaningful failure without adding tests that repeat existing guarantees.
 - Test expectations should have an independent basis rather than repeat the implementation's algorithm.
 - A writing edit should remove filler while preserving technical terms, qualifications, failure details, and the author's voice.
@@ -81,3 +83,5 @@ Also adapted from [Matt Pocock's skills at `3cca18b`](https://github.com/mattpoc
 - `codebase-design`, `domain-modeling`, and `tdd/tests.md` contributed caller knowledge, the deletion test, concrete domain scenarios, selective decision records, and independent test expectations.
 
 Matt Pocock's copyright notice and the shared MIT permission notice are included in [LICENSE](LICENSE).
+
+Craft's design criteria also draw on John Ousterhout's *A Philosophy of Software Design*, using his [published second-edition extract](https://web.stanford.edu/~ouster/cgi-bin/aposd2ndEdExtract.pdf), [Stanford discussion notes](https://web.stanford.edu/~ouster/cs190-winter24/lectures/aposd), and [discussion with Robert Martin](https://github.com/johnousterhout/aposd-vs-clean-code). The guidance applies these ideas as decision criteria rather than prescribing a particular architecture or process.

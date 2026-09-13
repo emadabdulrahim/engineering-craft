@@ -6,35 +6,30 @@ slash: true
 
 # Craft
 
-Deliver working software with less complexity for the next engineer. Choose the approach and sequence that fit the task. These are decision criteria, not a mandatory checklist or reply template.
+Deliver working software that is easier to understand and change. Use these criteria to exercise judgment, not as a mandatory checklist or reply template.
 
 ## Understand before changing
 
-- Understand the affected behavior, callers, data flow, and constraints. Read relevant project guidance and code, not the whole repository by default.
-- For a bug, establish the failure and trace its mechanism before choosing a fix. Use reproduction, tests, logs, or instrumentation to distinguish evidence from a plausible explanation. If evidence is unavailable, name the uncertainty rather than claiming a confirmed cause.
-- Fix the problem where its rules or state belong. Do not conceal a broken invariant with another conditional, fallback, or layer. Guards are appropriate where invalid input or failure is part of the contract.
+- Understand the affected behavior, callers, data flow, and constraints. Follow project conventions and reuse existing capabilities, while questioning patterns that cause the problem. Read what the change requires, not the whole repository by default.
+- For a bug, establish the failure and trace its mechanism using reproduction, tests, logs, or instrumentation. Distinguish evidence from a plausible explanation and name unresolved uncertainty.
+- Fix the problem where its rules or state belong. Guards should enforce a meaningful contract, not conceal a broken invariant with another conditional, fallback, or layer.
 
 ## Make the design simpler
 
-- Prefer composition and clear, declarative expressions of intent. Use ordinary functions, data structures, and straightforward control flow before frameworks or clever abstractions. A simple loop is better than an elaborate abstraction that hides it.
-- Minimize duplicated knowledge, hidden state, indirection, and coordination between files. The simplest maintainable solution is not necessarily the smallest diff.
-- Keep related behavior and invariants together. Give each fact an authoritative representation and derive other values when practical. Share code around a common rule or responsibility, not merely similar-looking text.
-- Follow project conventions and reuse existing capabilities. Do not perpetuate a convention that causes the problem. Model meaningful states explicitly, derive types from their authoritative definitions, and validate untrusted data where it enters the system.
-- Leave the affected code better. Include reasonably sized refactoring, consolidation, and organization in the same change when they clarify the implementation or remove related risk. Preserve behavior during structural cleanup and verify it alongside the requested change. Do not expand into an unrelated rewrite.
-- Remove obsolete paths involved in the change. Avoid parallel implementations, compatibility shims, and speculative extension points. Keep simple code when no structural change earns its place.
-- Consider algorithms, data access, network round trips, and resource lifetime. Measure before making non-obvious performance tradeoffs. Do not claim an improvement without evidence.
+- Judge simplicity by what a maintainer must know to make a correct change, how many places must change together, and how discoverable those dependencies are. A smaller diff or more helpers is not inherently simpler.
+- Prefer composition and readable expressions of intent. Use declarative code when it clarifies behavior and straightforward control flow when that is clearer. Choose abstractions for the understanding they save, not their size or pattern name.
+- Keep related behavior and invariants together. Represent each fact authoritatively and derive other values when practical. Model meaningful states explicitly, derive types from their authoritative definitions, and validate untrusted data at entry points.
+- Include reasonably sized, related refactoring and consolidation when they clarify the requested change or reduce its risk. Preserve behavior during structural cleanup. Remove obsolete paths instead of retaining parallel implementations or compatibility shims; keep unrelated cleanup out of scope.
+- Document non-obvious contracts and rationale near their owner. Add information that names, types, and code do not communicate clearly rather than narrating statements.
+- Consider algorithms, data access, network round trips, and resource lifetime. Measure material performance tradeoffs and support improvement claims with evidence.
 
 ## Verify and finish
 
-- Choose checks that establish the changed behavior and relevant failure modes. Exercise the actual feature or integration when correctness depends on it. A successful build alone does not establish runtime behavior.
-- Add a test when it catches a plausible, meaningful failure that existing checks miss. Prefer stable behavior contracts over private call sequences or mock setup. For a regression, show that the check detects the original failure when feasible. Do not chase test counts or coverage percentages.
-- Establish expected results independently of the implementation, using the contract, a worked example, or a trusted reference. Recomputing the expectation with the same algorithm can reproduce the same mistake and create false confidence.
-- Verify coherent units of work before building further on them. Reuse existing checks before adding a custom harness. For refactors, establish which behavior must remain unchanged and check that contract.
-- Continue through implementation, verification, and correction of failures caused by the change. Distinguish pre-existing failures from regressions. Report the result, relevant evidence, and remaining limitations without manufacturing sections or certainty.
-- Make implementation decisions within the request. Ask when a material ambiguity changes the outcome or an action needs authorization. This skill does not authorize publishing, deploying, destructive actions, or changing Git history. Preserve unrelated user work.
+- Verify coherent units before building further on them. Check changed behavior, relevant failure modes, and contracts preserved by refactors. Exercise the actual feature or integration where correctness depends on it; a build alone does not establish runtime behavior.
+- Reuse existing checks. Add tests for meaningful failures they miss, using stable behavior contracts and expectations independent of the implementation. For regressions, show that the check detects the original failure when feasible. Test counts and coverage percentages are not the goal.
+- Continue through implementation, verification, and correction of failures caused by the change. Distinguish pre-existing failures from regressions and report the result, evidence, and remaining limitations.
+- Make implementation decisions within the request. Ask when a material ambiguity changes the outcome or an action needs authorization. Preserve unrelated user work. This skill does not authorize publishing, deploying, destructive actions, or changing Git history.
 
 ## Route consequential design decisions
 
-Read [design guidance](references/design.md) when the task introduces or materially changes module boundaries, shared contracts, state ownership, persistence, or cross-component coordination. Also read it when the user explicitly asks for architecture or design work.
-
-Do not load it merely because the task adds a feature. Use the existing design when it fits.
+Read [design guidance](references/design.md) for material changes to module boundaries, shared contracts, state ownership, persistence, or cross-component coordination, or for explicit architecture work. Otherwise, use the existing design when it fits.
