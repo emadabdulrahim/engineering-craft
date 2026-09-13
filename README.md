@@ -10,14 +10,15 @@ A small set of skills for engineering judgment, clear writing, and change-risk a
 - [Grill me](skills/grill-me/SKILL.md) challenges a plan through focused questions and recommendations before implementation.
 - [Prototype](skills/prototype/SKILL.md) builds a small, runnable experiment for a UI, interaction, or state-model question.
 - [Handoff](skills/handoff/SKILL.md) captures the context a fresh session needs without duplicating existing artifacts.
+- [Walkthrough](skills/walkthrough/SKILL.md) guides an experienced engineer through unfamiliar code in small, source-backed steps.
 
 The skills are independently selectable. Craft does not require loading the others for every code change or short reply. None imposes a Git workflow or PR template. Interviews, experiments, and handoffs stay within their requested scope rather than automatically continuing into implementation.
 
 ## Invocation
 
-After registration, request a skill with its slash command:
+In Claude Code and OpenCode 2, request a skill with its slash command. In Codex, select a skill in the client or mention it explicitly with `$skill-name` where supported.
 
-| Command | OpenCode invocation |
+| Skill | Invocation policy |
 | --- | --- |
 | `/craft <task>` | Manual or automatic for substantive code changes |
 | `/unslop <writing request>` | Manual or automatic for substantive writing |
@@ -25,23 +26,72 @@ After registration, request a skill with its slash command:
 | `/grill-me <plan or question>` | Manual only |
 | `/prototype <design question>` | Manual only |
 | `/handoff <next session's focus>` | Manual only |
+| `/walkthrough <question or area>` | Manual only |
 
-Automatic selection is model judgment, not guaranteed enforcement. In OpenCode V2, `slash: true` exposes each skill in the interactive command catalog. Grill me, prototype, and handoff opt out of automatic discovery with this frontmatter:
+Automatic selection is model judgment, not guaranteed enforcement. Grill me, prototype, handoff, and walkthrough use each tool's manual-only setting. Claude Code and OpenCode read these fields in `SKILL.md`:
 
 ```yaml
+disable-model-invocation: true
 metadata:
   opencode/autoinvoke: false
 ```
 
-This setting hides a skill from the model's advertised list but leaves it available by explicit ID. It is an invocation preference, not an authorization boundary.
+Codex reads the policy in each manual skill's `agents/openai.yaml`:
 
-See the [OpenCode V2 skill documentation](https://opencode.ai/v2/docs/skills) for discovery, metadata, and precedence. Other harnesses have their own discovery and invocation rules.
+```yaml
+policy:
+  allow_implicit_invocation: false
+```
+
+The instructions are shared, not copied into separate versions for each tool. Invocation preferences do not grant permission to perform actions. See the [Claude Code](https://code.claude.com/docs/en/skills), [Codex](https://developers.openai.com/codex/build-skills), and [OpenCode 2](https://opencode.ai/v2/docs/skills) documentation for discovery and invocation details.
 
 ## Install
 
-Register your local checkout's `skills` directory in the `skills` array of your OpenCode configuration. Alternatively, copy the desired skill directories into a project's `.opencode/skills/` directory.
+On macOS or Linux, clone this repository wherever you want to keep it:
 
-An explicit source can override installed skills with the same IDs. Choose one version deliberately before registration. This collection does not register itself or modify existing skills.
+```bash
+git clone https://github.com/emadabdulrahim/engineering-craft.git
+cd engineering-craft
+./install.sh
+```
+
+The installer creates per-skill symlinks to this checkout in `~/.claude/skills/` for Claude Code and `~/.agents/skills/` for Codex. OpenCode 2 discovers both locations automatically and resolves duplicate IDs by precedence. Both copies of each link point to the same instructions.
+
+The script works from any current directory and requires Bash and standard Unix utilities. Correct existing links are left alone. Conflicting files, directories, or links cause installation to stop before creating any links. Resolve the reported conflicts yourself, then rerun. Agent configuration, permissions, and unrelated skills are untouched.
+
+If OpenCode already has an explicit skill source with the same IDs, that source takes precedence. Avoid leaving an explicit source pointing to an older checkout. This installer does not edit existing configuration.
+
+These links apply to local sessions on this computer, not remote or cloud environments. Start a fresh session if an agent does not detect an update.
+
+### Update
+
+From this checkout on `main`:
+
+```bash
+git pull --ff-only
+./install.sh
+```
+
+Content changes are available through existing links immediately; rerunning registers newly added skills. The checkout must stay in place. Before moving or deleting it, uninstall its links, then run the installer from the new location if needed.
+
+### Uninstall
+
+```bash
+./install.sh --uninstall
+```
+
+Only symlinks pointing to this checkout's skill folders are removed, including links to skills deleted since installation. Source files, agent configuration, unrelated entries, and destination directories are preserved. Repeated uninstall runs are safe.
+
+If you also registered this checkout as an explicit OpenCode skill source, it remains active until you remove that entry from the configuration.
+
+## Test the installer
+
+```bash
+bash -n install.sh
+python3 -B -m unittest discover -s tests -v
+```
+
+Tests execute a copy of the real installer against copied skills and temporary home directories. They cover repeated installation, live source updates, new skills, conflicts, paths with spaces, and scoped removal without modifying your actual agent setup. They do not test agent interpretation of the instructions.
 
 ## Evaluate
 
@@ -59,6 +109,7 @@ Useful review cases:
 - A grilling session should investigate discoverable facts, ask dependency-aware questions, and stop at confirmed understanding rather than start implementation.
 - A prototype should answer an explicit question, expose relevant state or UI differences, and report the limits of mocked behavior without automatically promoting code to production.
 - A handoff should preserve decisions and unfinished work, link to existing evidence, and save outside the repository unless another destination was requested.
+- A walkthrough should explain one coherent idea at a time, link to actual code, and support detours without losing the main thread or starting implementation.
 - Completion should not trigger an unsolicited commit, branch, PR, or deployment.
 
 These are evaluation cases, not claims that agent behavior has been tested.

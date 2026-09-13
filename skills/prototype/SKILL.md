@@ -2,6 +2,7 @@
 name: prototype
 description: "Build a small experiment to answer a design question. Use for requested UI alternatives or interactive exploration of logic and state, not routine feature implementation."
 slash: true
+disable-model-invocation: true
 metadata:
   opencode/autoinvoke: false
 ---

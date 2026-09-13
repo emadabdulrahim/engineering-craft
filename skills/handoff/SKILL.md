@@ -2,6 +2,7 @@
 name: handoff
 description: "Capture the context a fresh session needs to continue the work. Invoke explicitly, optionally naming the next session's focus."
 slash: true
+disable-model-invocation: true
 metadata:
   opencode/autoinvoke: false
 ---

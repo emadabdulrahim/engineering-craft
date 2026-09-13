@@ -2,6 +2,7 @@
 name: grill-me
 description: "Stress-test a plan or design through a focused interview. Invoke explicitly to challenge assumptions and resolve consequential decisions before implementation."
 slash: true
+disable-model-invocation: true
 metadata:
   opencode/autoinvoke: false
 ---
