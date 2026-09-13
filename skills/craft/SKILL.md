@@ -28,6 +28,7 @@ Deliver working software with less complexity for the next engineer. Choose the 
 
 - Choose checks that establish the changed behavior and relevant failure modes. Exercise the actual feature or integration when correctness depends on it. A successful build alone does not establish runtime behavior.
 - Add a test when it catches a plausible, meaningful failure that existing checks miss. Prefer stable behavior contracts over private call sequences or mock setup. For a regression, show that the check detects the original failure when feasible. Do not chase test counts or coverage percentages.
+- Establish expected results independently of the implementation, using the contract, a worked example, or a trusted reference. Recomputing the expectation with the same algorithm can reproduce the same mistake and create false confidence.
 - Verify coherent units of work before building further on them. Reuse existing checks before adding a custom harness. For refactors, establish which behavior must remain unchanged and check that contract.
 - Continue through implementation, verification, and correction of failures caused by the change. Distinguish pre-existing failures from regressions. Report the result, relevant evidence, and remaining limitations without manufacturing sections or certainty.
 - Make implementation decisions within the request. Ask when a material ambiguity changes the outcome or an action needs authorization. This skill does not authorize publishing, deploying, destructive actions, or changing Git history. Preserve unrelated user work.

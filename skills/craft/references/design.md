@@ -6,6 +6,8 @@ Resolve the decisions that would be expensive to undo. Scale the explanation to 
 
 Identify the expected behavior, constraints, and invariants. Separate requirements from assumptions. Look at real callers and representative data before designing an interface.
 
+Resolve ambiguous domain terms with concrete scenarios. Check whether the code matches the stated behavior, and distinguish an implementation defect from a change in requirements. Use the project's established vocabulary rather than imposing a new glossary.
+
 Sketch a caller, data model, or interaction when it exposes a consequential choice. Do not require empty function bodies or multiple proposals when the existing design already answers the question.
 
 ## Put knowledge and state with their owners
@@ -20,9 +22,13 @@ Use a state machine, discriminated union, registry, or another structure when it
 
 Prefer cohesive modules with explicit dependencies and small, meaningful contracts. Keep side effects visible. Separate policy from infrastructure when doing so isolates real variation or makes important behavior testable.
 
+An interface includes everything a caller must know: ordering, invariants, errors, configuration, and performance characteristics, not just types or method signatures. Judge an abstraction by how much knowledge it removes from callers, not by the size of its implementation.
+
 Prefer composition over inheritance hierarchies that couple unrelated behavior. Introduce a shared abstraction when consumers share a rule and should change together. Keep superficially similar code separate when its responsibilities differ.
 
 An interface, adapter, event bus, generic framework, or new dependency needs a concrete job. Name the coupling or complexity it removes and the complexity it introduces. Do not build hypothetical consumers or extension points.
+
+Apply the deletion test when a module seems unnecessary. If removing it removes complexity, it may not earn its place. If its responsibilities would spread across callers, it is doing useful work. Trace where the responsibility goes rather than counting deleted lines.
 
 ## Design relevant failure and cost behavior
 
@@ -37,5 +43,7 @@ Identify likely costs in data growth, repeated work, I/O, and resource retention
 Prefer the least complex approach that satisfies the contract and credible growth constraints. Compare alternatives only when the tradeoff is meaningful. Use a named pattern to solve a concrete problem, not to demonstrate architectural sophistication.
 
 Briefly explain the consequential choice, its tradeoff, and how it will be verified. Use a diagram, example, or short design note only when it makes the decision easier to understand. Follow the project's convention for recording durable architectural decisions.
+
+A durable decision record is useful when the choice is costly to reverse, surprising without context, and the result of a genuine tradeoff. Do not create a document merely because a design conversation occurred.
 
 Resolve product ambiguity or commitments outside the request before proceeding. Otherwise, make the design decision and continue through implementation and verification without an automatic review gate.
