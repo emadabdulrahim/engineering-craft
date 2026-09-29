@@ -11,6 +11,7 @@ A small set of skills for engineering judgment, clear writing, and change-risk a
 - [Prototype](skills/prototype/SKILL.md) builds a small, runnable experiment for a UI, interaction, or state-model question.
 - [Handoff](skills/handoff/SKILL.md) captures the context a fresh session needs without duplicating existing artifacts.
 - [Walkthrough](skills/walkthrough/SKILL.md) guides an experienced engineer through unfamiliar code in small, source-backed steps.
+- [Test audit](skills/test-audit/SKILL.md) gates new tests on the behavior they protect and audits existing tests for low-value, duplicated, or implementation-coupled coverage.
 
 The skills are independently selectable. Craft does not require loading the others for every code change or short reply. None imposes a Git workflow or PR template. Interviews, experiments, and handoffs stay within their requested scope rather than automatically continuing into implementation.
 
@@ -27,6 +28,7 @@ In Claude Code and OpenCode 2, request a skill with its slash command. In Codex,
 | `/prototype <design question>` | Manual only |
 | `/handoff <next session's focus>` | Manual only |
 | `/walkthrough <question or area>` | Manual only |
+| `/test-audit <tests or area>` | Manual or automatic when writing, changing, or reviewing tests |
 
 Automatic selection is model judgment, not guaranteed enforcement. Grill me, prototype, handoff, and walkthrough use each tool's manual-only setting. Claude Code and OpenCode read these fields in `SKILL.md`:
 
@@ -134,5 +136,11 @@ Also adapted from [Matt Pocock's skills at `3cca18b`](https://github.com/mattpoc
 - `codebase-design`, `domain-modeling`, and `tdd/tests.md` contributed caller knowledge, the deletion test, concrete domain scenarios, selective decision records, and independent test expectations.
 
 Matt Pocock's copyright notice and the shared MIT permission notice are included in [LICENSE](LICENSE).
+
+Also adapted from [OpenClaw's `test-audit` skill](https://github.com/openclaw/openclaw/blob/main/.agents/skills/test-audit/SKILL.md):
+
+- The authoring gate, junk patterns, retention bar, and candidate evidence fields are kept. Campaign mode and OpenClaw-specific tooling (`$openclaw-testing`, `$crabbox`, `$autoreview`, `scripts/pr`, Vitest runners) are removed, and Git operations happen only when asked.
+
+OpenClaw's copyright notice is included in [LICENSE](LICENSE).
 
 Craft's design criteria also draw on John Ousterhout's *A Philosophy of Software Design*, using his [published second-edition extract](https://web.stanford.edu/~ouster/cgi-bin/aposd2ndEdExtract.pdf), [Stanford discussion notes](https://web.stanford.edu/~ouster/cs190-winter24/lectures/aposd), and [discussion with Robert Martin](https://github.com/johnousterhout/aposd-vs-clean-code). The guidance applies these ideas as decision criteria rather than prescribing a particular architecture or process.
