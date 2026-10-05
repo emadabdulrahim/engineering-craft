@@ -12,8 +12,10 @@ A small set of skills for engineering judgment, clear writing, and change-risk a
 - [Handoff](skills/handoff/SKILL.md) captures the context a fresh session needs without duplicating existing artifacts.
 - [Walkthrough](skills/walkthrough/SKILL.md) guides an experienced engineer through unfamiliar code in small, source-backed steps.
 - [Test audit](skills/test-audit/SKILL.md) gates new tests on the behavior they protect and audits existing tests for low-value, duplicated, or implementation-coupled coverage.
+- [PR](skills/pr/SKILL.md) writes pull request descriptions around consequential decisions, with the smallest view that shows the change, real evidence, and a reversibility call.
+- [Retro](skills/retro/SKILL.md) reviews a coding session for environment changes, such as checks, pointers, and steering-file cleanup, that would improve future runs.
 
-The skills are independently selectable. Craft does not require loading the others for every code change or short reply. None imposes a Git workflow or PR template. Interviews, experiments, and handoffs stay within their requested scope rather than automatically continuing into implementation.
+The skills are independently selectable. Craft does not require loading the others for every code change or short reply. None imposes a Git workflow, and PR fills a repository's own template when one exists. Interviews, experiments, handoffs, and retros stay within their requested scope rather than automatically continuing into implementation.
 
 ## Invocation
 
@@ -29,8 +31,10 @@ In Claude Code and OpenCode 2, request a skill with its slash command. In Codex,
 | `/handoff <next session's focus>` | Manual only |
 | `/walkthrough <question or area>` | Manual only |
 | `/test-audit <tests or area>` | Manual or automatic when writing, changing, or reviewing tests |
+| `/pr <change or PR>` | Manual or automatic when writing a PR description |
+| `/retro <session>` | Manual only |
 
-Automatic selection is model judgment, not guaranteed enforcement. Grill me, prototype, handoff, and walkthrough use each tool's manual-only setting. Claude Code and OpenCode read these fields in `SKILL.md`:
+Automatic selection is model judgment, not guaranteed enforcement. Grill me, prototype, handoff, walkthrough, and retro use each tool's manual-only setting. Claude Code and OpenCode read these fields in `SKILL.md`:
 
 ```yaml
 disable-model-invocation: true
@@ -112,21 +116,15 @@ Useful review cases:
 - A prototype should answer an explicit question, expose relevant state or UI differences, and report the limits of mocked behavior without automatically promoting code to production.
 - A handoff should preserve decisions and unfinished work, link to existing evidence, and save outside the repository unless another destination was requested.
 - A walkthrough should explain one coherent idea at a time, link to actual code, and support detours without losing the main thread or starting implementation.
+- A PR description should lead with decisions about boundaries, state, and data flow rather than a file-by-file changelog, show at most a view or two, state what was not verified, and shrink to a few lines for a local fix.
+- A retro should trace each recommendation to a moment in the session, prefer a deterministic check over a written rule for mechanical mistakes, and change nothing until the user chooses.
 - Completion should not trigger an unsolicited commit, branch, PR, or deployment.
 
 These are evaluation cases, not claims that agent behavior has been tested.
 
 ## Source material
 
-Adapted from Lowside Labs' private `agent-stack` collection:
-
-- Craft and the principle skills contributed root causes, domain modeling, simplicity, authoritative types, direct verification, and coherent units of work.
-- Its unslop reference and technical-writing skill contributed concrete language, consistent terminology, precise instructions, and respect for meaning over stylistic rules.
-- Its blast-radius skill contributed indirect dependency analysis, version-specific investigation, lifecycle reasoning, and evidence for safety assumptions.
-
-Removed separate principle activation, mandatory playbooks, automatic Git operations, rigid writing layers, and the requirement that every risk assessment produce a script or depend on one safety fact.
-
-The source identifies itself as a derivative of pstack. Its copyright and license notice are preserved in [LICENSE](LICENSE).
+Craft, unslop, and blast radius build on Lauren Tan's [pstack](https://github.com/cursor/plugins/tree/main/pstack). Its copyright and license notice are preserved in [LICENSE](LICENSE).
 
 Also adapted from [Matt Pocock's skills at `3cca18b`](https://github.com/mattpocock/skills/tree/3cca18b368ae95cdbdebbff572ccafa662551015):
 
@@ -134,6 +132,11 @@ Also adapted from [Matt Pocock's skills at `3cca18b`](https://github.com/mattpoc
 - `prototype` contributed question-led experiments, interactive state exploration, and meaningful UI alternatives. This version leaves the artifact format flexible and removes automatic Git operations and production promotion.
 - `handoff` contributed focused session transfer, artifact pointers, temporary-file output, and redaction.
 - `codebase-design`, `domain-modeling`, and `tdd/tests.md` contributed caller knowledge, the deletion test, concrete domain scenarios, selective decision records, and independent test expectations.
+
+And from [Matt Pocock's skills at `v1.3.1`](https://github.com/mattpocock/skills/tree/v1.3.1):
+
+- `pr` contributed the smallest-view summary, shaped diffs, before-and-after evidence, and the one-way or two-way door call. Its view menu credits Dex Horthy's `show-me`. This version centers the description on decisions, scales it to consequence, follows a repository's template, and leaves drawing each view to the model.
+- `retro` contributed the environment-improvement categories, check-over-rule classification, and placing standards with review. This version drops the dependency on a writing skill and on a specific standards file.
 
 Matt Pocock's copyright notice and the shared MIT permission notice are included in [LICENSE](LICENSE).
 

@@ -1,6 +1,6 @@
 ---
 name: unslop
-description: "Write or revise PR descriptions, commit messages, docs, and explanatory prose for clarity and a natural voice. Use for substantive writing or explicit /unslop, not routine status updates."
+description: "Write or revise commit messages, docs, and explanatory prose for clarity and a natural voice. Use for substantive writing or explicit /unslop, not routine status updates."
 slash: true
 ---
 
@@ -29,4 +29,4 @@ Make the writing useful to its reader. Preserve meaning, technical precision, an
 - Do not use em dashes. Otherwise, choose punctuation and sentence structure for clarity. Parentheses, passive voice, and words ending in "-ing" are not inherently problems.
 - Do not churn text that is already clear. If a stylistic preference makes a sentence less accurate or harder to read, choose another edit or leave it alone.
 
-Follow project templates and product copy guidance where applicable. Return the requested writing without an unsolicited explanation of every edit. Writing a commit message or PR description does not authorize committing or publishing it.
+Follow project templates and product copy guidance where applicable. Return the requested writing without an unsolicited explanation of every edit. Writing a commit message does not authorize committing it.
