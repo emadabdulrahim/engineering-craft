@@ -11,7 +11,7 @@ Deliver working software that is easier to understand and change. Use these crit
 ## Understand before changing
 
 - Understand the affected behavior, callers, data flow, and constraints. Follow project conventions and reuse existing capabilities, while questioning patterns that cause the problem. Read what the change requires, not the whole repository by default.
-- For a bug, establish the failure and trace its mechanism using reproduction, tests, logs, or instrumentation. Distinguish evidence from a plausible explanation and name unresolved uncertainty.
+- For a bug, first build a tight loop that goes red on the reported symptom: a test, script, or command you have run. Theorize only once it exists, weighing several falsifiable hypotheses rather than the first plausible one. Distinguish evidence from explanation and name unresolved uncertainty.
 - Fix the problem where its rules or state belong. Guards should enforce a meaningful contract, not conceal a broken invariant with another conditional, fallback, or layer.
 
 ## Make the design simpler
@@ -25,7 +25,7 @@ Deliver working software that is easier to understand and change. Use these crit
 
 ## Verify and finish
 
-- Verify coherent units before building further on them. Check changed behavior, relevant failure modes, and contracts preserved by refactors. Exercise the actual feature or integration where correctness depends on it; a build alone does not establish runtime behavior.
+- Verify coherent units before building further on them. Check changed behavior, relevant failure modes, and contracts preserved by refactors. Check the diff against the request: missing or partial requirements, behavior nobody asked for, and requirements implemented wrongly. Exercise the actual feature or integration where correctness depends on it; a build alone does not establish runtime behavior.
 - Reuse existing checks. Add tests for meaningful failures they miss, using stable behavior contracts and expectations independent of the implementation. For regressions, show that the check detects the original failure when feasible. Test counts and coverage percentages are not the goal.
 - Continue through implementation, verification, and correction of failures caused by the change. Distinguish pre-existing failures from regressions and report the result, evidence, and remaining limitations.
 - Make implementation decisions within the request. Ask when a material ambiguity changes the outcome or an action needs authorization. Preserve unrelated user work. This skill does not authorize publishing, deploying, destructive actions, or changing Git history.

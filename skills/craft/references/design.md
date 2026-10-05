@@ -34,6 +34,6 @@ Identify likely costs in data growth, repeated work, I/O, and resource retention
 
 ## Choose and explain
 
-Compare plausible alternatives when the tradeoff matters. Use a caller sketch, data model, or diagram when it helps evaluate the choice; the existing design may already be sufficient.
+When an interface or ownership choice is consequential, sketch two or three genuinely different designs, such as the smallest interface or the simplest common call, before choosing, and recommend one. Use a caller sketch, data model, or diagram when it helps evaluate the choice; the existing design may already be sufficient.
 
 Explain consequential choices and how they will be verified. Keep non-obvious contract documentation near its owner and separate from implementation detail. Record a durable architectural decision using project conventions when it is costly to reverse, surprising without context, and the result of a genuine tradeoff.

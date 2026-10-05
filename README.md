@@ -136,6 +136,7 @@ Also adapted from [Matt Pocock's skills at `3cca18b`](https://github.com/mattpoc
 And from [Matt Pocock's skills at `v1.3.1`](https://github.com/mattpocock/skills/tree/v1.3.1):
 
 - `pr` contributed the smallest-view summary, shaped diffs, before-and-after evidence, and the one-way or two-way door call. Its view menu credits Dex Horthy's `show-me`. This version centers the description on decisions, scales it to consequence, follows a repository's template, and leaves drawing each view to the model.
+- `diagnosing-bugs`, `code-review`, and `codebase-design` contributed craft's red loop before hypotheses, the check against the request, and designing it twice.
 - `retro` contributed the environment-improvement categories, check-over-rule classification, and placing standards with review. This version drops the dependency on a writing skill and on a specific standards file.
 
 Matt Pocock's copyright notice and the shared MIT permission notice are included in [LICENSE](LICENSE).
