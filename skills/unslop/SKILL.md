@@ -24,8 +24,9 @@ Make the writing useful to its reader. Preserve meaning, technical precision, an
 
 ## Keep the voice natural
 
-- Match the audience and existing voice. Do not inject opinions, enthusiasm, first-person claims, or deliberate messiness to make text appear human.
-- Remove stock openings, praise, forced contrasts, and generic conclusions. Use headings, bullets, tables, and emphasis only when they help the reader navigate real structure.
+- Match the audience and existing voice. When revising someone else's writing, do not inject opinions, enthusiasm, or first-person claims. Never add deliberate messiness to make text appear human.
+- Write the way you would explain it to a colleague: full sentences, joined with ordinary words like "because" and "so". Do not compress ideas into fragments, arrows, or stacked nouns.
+- Remove stock openings, praise, setups and reveals ("Here's the thing", "The result:"), rhetorical questions, framing by negation ("It's not X, it's Y"), and generic conclusions. Headings are plain labels, not hooks. Use headings, bullets, tables, and emphasis only when they help the reader navigate real structure.
 - Do not use em dashes. Otherwise, choose punctuation and sentence structure for clarity. Parentheses, passive voice, and words ending in "-ing" are not inherently problems.
 - Do not churn text that is already clear. If a stylistic preference makes a sentence less accurate or harder to read, choose another edit or leave it alone.
 

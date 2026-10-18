@@ -12,7 +12,7 @@ A small set of skills for engineering judgment, clear writing, and change-risk a
 - [Handoff](skills/handoff/SKILL.md) captures the context a fresh session needs without duplicating existing artifacts.
 - [Walkthrough](skills/walkthrough/SKILL.md) guides an experienced engineer through unfamiliar code in small, source-backed steps.
 - [Test audit](skills/test-audit/SKILL.md) gates new tests on the behavior they protect and audits existing tests for low-value, duplicated, or implementation-coupled coverage.
-- [PR](skills/pr/SKILL.md) writes pull request descriptions around consequential decisions, with the smallest view that shows the change, real evidence, and a reversibility call.
+- [PR](skills/pr/SKILL.md) writes pull request descriptions that open with what the approver is agreeing to, a verdict, and the decisions, and fold the system-shape detail for reviewers, with real evidence and a reversibility call.
 - [Retro](skills/retro/SKILL.md) reviews a coding session for environment changes, such as checks, pointers, and steering-file cleanup, that would improve future runs.
 
 The skills are independently selectable. Craft does not require loading the others for every code change or short reply. None imposes a Git workflow, and PR fills a repository's own template when one exists. Interviews, experiments, handoffs, and retros stay within their requested scope rather than automatically continuing into implementation.
