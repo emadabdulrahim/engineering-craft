@@ -42,4 +42,4 @@ Run the experiment and exercise the relevant scenarios. Check that the artifact 
 
 Provide the file or local URL, how to run it, and what to try. Explain what was observed, what remains unresolved, and which shortcuts limit the evidence. Keep your recommendation distinct from the user's choice.
 
-Stop at the experiment unless implementation was also requested. Carry validated decisions into production only with appropriate implementation and verification. Do not automatically commit, create branches, publish, delete the experiment, or promote prototype code into production.
+Stop at the experiment unless implementation was also requested, and leave the experiment in place. Prototype code does not become production code without its own implementation and verification.

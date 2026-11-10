@@ -4,15 +4,16 @@ A small set of skills for engineering judgment, clear writing, and change-risk a
 
 ## Skills
 
-- [Craft](skills/craft/SKILL.md) contains the everyday engineering standard and routes consequential architectural decisions to [design guidance](skills/craft/references/design.md).
+- [Craft](skills/craft/SKILL.md) contains the everyday engineering standard: fix the cause, get the data model and boundaries right, leave the touched code better, and verify.
+- [Review](skills/review/SKILL.md) reviews a change for whether it is the right solution, whether it is correct, and what it should clean up.
 - [Unslop](skills/unslop/SKILL.md) guides substantive writing without forced personality, word blacklists, or a mandatory editing process.
 - [Blast radius](skills/blast-radius/SKILL.md) investigates consequences beyond the diff and tests the assumptions that make a change safe.
 - [Grill me](skills/grill-me/SKILL.md) challenges a plan through focused questions and recommendations before implementation.
 - [Prototype](skills/prototype/SKILL.md) builds a small, runnable experiment for a UI, interaction, or state-model question.
 - [Handoff](skills/handoff/SKILL.md) captures the context a fresh session needs without duplicating existing artifacts.
 - [Walkthrough](skills/walkthrough/SKILL.md) guides an experienced engineer through unfamiliar code in small, source-backed steps.
-- [Test audit](skills/test-audit/SKILL.md) gates new tests on the behavior they protect and audits existing tests for low-value, duplicated, or implementation-coupled coverage.
-- [PR](skills/pr/SKILL.md) writes pull request descriptions that open with what the approver is agreeing to, a verdict, and the decisions, and fold the system-shape detail for reviewers, with real evidence and a reversibility call.
+- [Test audit](skills/test-audit/SKILL.md) holds the value bar for tests, for writing new ones and for removing low-value, duplicated, or implementation-coupled ones.
+- [PR](skills/pr/SKILL.md) writes short pull request descriptions that give the problem, what changed, and the verification, plus anything the reader would want a say in.
 - [Retro](skills/retro/SKILL.md) reviews a coding session for environment changes, such as checks, pointers, and steering-file cleanup, that would improve future runs.
 
 The skills are independently selectable. Craft does not require loading the others for every code change or short reply. None imposes a Git workflow, and PR fills a repository's own template when one exists. Interviews, experiments, handoffs, and retros stay within their requested scope rather than automatically continuing into implementation.
@@ -24,6 +25,7 @@ In Claude Code and OpenCode 2, request a skill with its slash command. In Codex,
 | Skill | Invocation policy |
 | --- | --- |
 | `/craft <task>` | Manual or automatic for substantive code changes |
+| `/review <change, branch, or PR>` | Manual or automatic when reviewing code |
 | `/unslop <writing request>` | Manual or automatic for substantive writing |
 | `/blast-radius <change>` | Manual or automatic for relevant risk assessment |
 | `/grill-me <plan or question>` | Manual only |
@@ -103,9 +105,10 @@ Tests execute a copy of the real installer against copied skills and temporary h
 
 Useful review cases:
 
-- A local bug fix should investigate the cause without inventing an architectural redesign.
-- A feature that changes state ownership should load the design reference and explain the consequential choice.
-- Related duplication should prompt consolidation when it removes repeated knowledge, not an unrelated repository cleanup. Extraction should reduce what readers must understand rather than scatter tightly related logic.
+- A bug fix should repair the cause where its rule or state belongs. When the right fix is larger than the request, the agent should say so and recommend it rather than ship a patch as the fix.
+- A feature that changes state ownership should compare genuinely different designs and explain the consequential choice.
+- Duplication and dead code in the touched area should be cleaned up as part of the work, and larger improvements reported, not an unrelated repository cleanup. Extraction should reduce what readers must understand rather than scatter tightly related logic.
+- A review should judge the solution before the details, confirm findings before reporting them, fix small things in its own work, and only report on someone else's.
 - A shared interface should simplify current use without embedding product-specific cases or making every caller repeat its mechanics. Contract documentation should expose the information callers need without narrating implementation details.
 - Special-case elimination should preserve meaningful failures, not hide invalid input or report failed work as successful.
 - Verification should target a meaningful failure without adding tests that repeat existing guarantees.
@@ -116,7 +119,7 @@ Useful review cases:
 - A prototype should answer an explicit question, expose relevant state or UI differences, and report the limits of mocked behavior without automatically promoting code to production.
 - A handoff should preserve decisions and unfinished work, link to existing evidence, and save outside the repository unless another destination was requested.
 - A walkthrough should explain one coherent idea at a time, link to actual code, and support detours without losing the main thread or starting implementation.
-- A PR description should lead with decisions about boundaries, state, and data flow rather than a file-by-file changelog, show at most a view or two, state what was not verified, and shrink to a few lines for a local fix.
+- A PR description should read in about a minute: the problem, what changed in product terms, and the verification including what was not checked, with no file-by-file changelog. A local fix should be a few sentences.
 - A retro should trace each recommendation to a moment in the session, prefer a deterministic check over a written rule for mechanical mistakes, and change nothing until the user chooses.
 - Completion should not trigger an unsolicited commit, branch, PR, or deployment.
 

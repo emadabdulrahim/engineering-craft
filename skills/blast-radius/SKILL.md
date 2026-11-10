@@ -28,4 +28,4 @@ Lead with actionable findings. For each material concern, explain the failure me
 
 Include relevant commands and outcomes so the evidence can be inspected or repeated. Recommend a focused follow-up for consequential uncertainty. Do not claim the entire change is safe merely because one check passed. If no problems were found, state the scope checked and remaining limits.
 
-An assessment request does not authorize fixing every issue, changing Git history, or publishing findings. Use safe local checks, preserve unrelated work, and exclude secrets and private data from shared evidence.
+An assessment is not a request to fix what it finds. Use safe local checks, and keep secrets and private data out of shared evidence.
